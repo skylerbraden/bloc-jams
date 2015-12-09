@@ -84,11 +84,11 @@ var getSongItem = function(element) {
             return findParentByClassName(element, 'song-item-number');
         // 2
         case 'album-view-song-item':
-            return element.querySelector('song-item-number');
+            return element.querySelector('.song-item-number');
         // 3
         case 'song-item-title':
         case 'song-item-duration':
-            return findParentByClassName(element, 'album-view-song-item').querySelector('song-item-number');
+            return findParentByClassName(element, 'album-view-song-item').querySelector('.song-item-number');
         // 4
         case 'song-item-number':
             return element;
@@ -100,7 +100,8 @@ var getSongItem = function(element) {
 var clickHandler = function(targetElement) {
     
     var songItem = getSongItem(targetElement);
-    
+//    console.log(targetElement);
+//    console.log(songItem);
     // I.e., when you CLICK on a song and nothing is currently playing,
     // change the song you click on to the pause button. The key point I was missing is:
     // "if when you click it's like this (what's inside the conditional), then do { ... }".
@@ -121,7 +122,7 @@ var clickHandler = function(targetElement) {
         songItem.innerHTML = pauseButtonTemplate;
         currentlyPlayingSong = songItem.getAttribute('data-song-number');
     }
-    
+
 };
 
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
@@ -140,7 +141,7 @@ window.onload = function() {
     
     songListContainer.addEventListener('mouseover', function(event) {
         if (event.target.parentElement.className === 'album-view-song-item') {
-                var songItem = getSongItem(event.target.parentElement.firstElementChild);
+                var songItem = getSongItem(event.target.parentElement);
             
                 if (songItem.getAttribute('data-song-number') !== currentlyPlayingSong) {
                     songItem.innerHTML = playButtonTemplate;
