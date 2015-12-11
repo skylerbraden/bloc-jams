@@ -67,13 +67,29 @@ var setCurrentAlbum = function(album) {
 
 // Change the Song Number to the Pause Button
 
+var child = document.getElementsByClassName('album-view-title')[0];
+var noParent = document.querySelector('html');
+
 var findParentByClassName = function(element, targetClass) {
     var currentParent = element.parentElement;
-    while(currentParent.className != targetClass) {
-        currentParent = currentParent.parentElement;
+        
+    if (currentParent) {
+        // The while loop is saying, if cP.className exists AND cP.className is not the targetClass, then execute code. This is done so that the loop doesn't reach the last parent of the document and throw an error.
+        while(currentParent.className && currentParent.className != targetClass) {
+            currentParent = currentParent.parentElement;
+        }
+        
+        if (currentParent.className == targetClass) {
+            return currentParent;
+        } else {
+            alert("No parent with that class name found.");
+        }
+    } else {
+        alert("No parent found.");
     }
-    return currentParent;
 };
+// Works with 'album' but not 'album-view'.
+findParentByClassName(child, 'album-view');
 
 var getSongItem = function(element) {
     switch(element.className) {
