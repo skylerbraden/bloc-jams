@@ -1,34 +1,33 @@
-var pointsArray = document.getElementsByClassName('point');
-
-var animatePoints = function(points) {
-    
-    var revealPoint = function(index) {
-        points[index].style.opacity = 1;
-        points[index].style.transform = "scaleX(1) translateY(0)";
-        points[index].style.msTransform = "scaleX(1) translateY(0)";
-        points[index].style.WebkitTransform = "scaleX(1) translateY(0)";
+// #5
+var animatePoints = function() {
+    var revealPoint = function() {
+        // #7
+        $(this).css({
+            opacity: 1,
+            transform: 'scaleX(1) translateY(0)'
+        });
     };
-    
-    for (var i = 0; i < points.length; i++) {
-        revealPoint(i);
-    }
+    // #6
+    $.each($('.point'), revealPoint);
 };
 
-window.onload = function() {
+
+$(window).load(function() {
     
-    // Automatically animate the points on a tall screen where scrolling can't trigger the animation
-    if(window.innerHeight > 950) {
-        animatePoints(pointsArray);
+    // #1
+    if ($(window).height() > 950) {
+        animatePoints();
     }
     
-    var sellingPoints = document.getElementsByClassName('selling-points')[0];
+    // #2
+    // Why doesn't this var have a $ in front of it to indicate it's a jQuery var?
+    var scrollDistance = $('.selling-points').offset().top - $(window).height() + 200;
     
-    var scrollDistance = sellingPoints.getBoundingClientRect().top - window.innerHeight + 200;
-    
-    window.addEventListener('scroll', function(event) {
-        if(document.body.scrollTop >= scrollDistance) {
-            animatePoints(pointsArray);
+    // #3
+    $(window).scroll(function(event) {
+        // #4
+        if ($(window).scrollTop() >= scrollDistance) {
+            animatePoints();
         }
-        
     });
-}
+});
