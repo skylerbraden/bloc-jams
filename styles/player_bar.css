@@ -103,7 +103,7 @@
 
 .seek-bar .fill {
     background: white;
-    width: 36%;
+    width: 0%;
     height: 0.25rem;
     border-radius: 2px;
 }
@@ -113,7 +113,7 @@
     height: 0.5rem;
     width: 0.5rem;
     background: white;
-    left: 36%;
+    left: 0%;
     top: 50%;
     /* #1 */
     margin-left: -0.25rem;
@@ -144,6 +144,10 @@
 .player-bar .volume {
     width: 25%;
     text-align: right;
+}
+
+.player-bar .volume .thumb {
+    left: 80%;
 }
 
 .player-bar .volume .icon {
